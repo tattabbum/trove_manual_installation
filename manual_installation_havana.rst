@@ -88,7 +88,7 @@ Prepare OpenStack
            --os-auth-url http://<KeystoneIp>:35357/v2.0 \
            tenant-create --name trove
 
-	Creazione user:
+	Creat a user:
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword>  \
            --os-tenant-name <OpenStackAdminTenant> \
            --os-auth-url http://<KeystoneIp>:35357/v2.0 \
