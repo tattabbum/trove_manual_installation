@@ -47,7 +47,7 @@ Loggin as root user and execute the following commands:
 Obtain Trove
 ------------
 
-* Get Trove’s sources from git::
+* Get Troveï¿½s sources from git::
 
 	# git clone https://github.com/openstack/trove.git
 	# git clone https://github.com/openstack/python-troveclient.git
@@ -67,13 +67,13 @@ Install Trove
 	# cd ~/python-troveclient
 	# python setup.py develop
 	# cd ~
-* We’ll need glance client as well::
+* Weï¿½ll need glance client as well::
 	# pip install python-glanceclient
 
 
 Prepare OpenStack
 -----------------
-* Create a tenant ‘trove’ and user ‘trove’ with password ‘trove’ to be used with Trove::
+* Create a tenant ï¿½troveï¿½ and user ï¿½troveï¿½ with password ï¿½troveï¿½ to be used with Trove::
 
 	Create tenant
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword>  \
@@ -106,7 +106,7 @@ Prepare OpenStack
            --os-auth-url http://<KeystoneIp>:35357/v2.0 \
            service-create --name trove --type database
 
-* Create endpoint that points to trove. Pay attention to the use of quotes (‘):
+* Create endpoint that points to trove. Pay attention to the use of quotes (ï¿½):
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword> \
            --os-tenant-name <OpenStackAdminTenant> \
            --os-auth-url http://<KeystoneIp>:35357/v2.0 endpoint-create \
@@ -120,13 +120,13 @@ Prepare Trove configuration files
 
 There are several configuration files for Trove:
 
-* api-paste.ini and trove.conf.sample – for trove-api
-* trove-taskmanager.conf.sample – for trove-taskmanager
-* trove-guestagent.conf.sample – for trove-guestagent
-* <service_type>.cloudinit – cloudinit scripts for different service types. For now only ‘mysql’ and ‘percona’ are recognized as valid service types. NOTE: file names must exactly follow the pattern, e.g. ‘mysql.cloudinit’
+* api-paste.ini and trove.conf.sample ï¿½ for trove-api
+* trove-taskmanager.conf.sample ï¿½ for trove-taskmanager
+* trove-guestagent.conf.sample ï¿½ for trove-guestagent
+* <service_type>.cloudinit ï¿½ cloudinit scripts for different service types. For now only ï¿½mysqlï¿½ and ï¿½perconaï¿½ are recognized as valid service types. NOTE: file names must exactly follow the pattern, e.g. ï¿½mysql.cloudinitï¿½
 
 Samples of the above are available in $TROVE/trove/etc/trove/ as *.conf.sample files.
-If a vanilla Ubuntu image used as a source image for Trove instances, then it is cloudinit script’s responsibility to install and run Trove guestagent in the instance.
+If a vanilla Ubuntu image used as a source image for Trove instances, then it is cloudinit scriptï¿½s responsibility to install and run Trove guestagent in the instance.
 As an alternative one may consider creating a custom image with pre-installed and pre-configured Trove in it.
 
 * Edit the trove.conf.sample and trove-taskmanager.conf.sample files, adding the Rabbit Hostname for AMQP::
@@ -144,7 +144,7 @@ As an alternative one may consider creating a custom image with pre-installed an
 	# in the home directory for the user the trove process is running as.
 	signing_dir = path_to_signing_dir (i.e. /root/trove/etc/trove)
 
-* Edit all the trove configuration files iaccording to the rows in the Devstack’s Trove installation (see the redstack function of devstack).
+* Edit all the trove configuration files iaccording to the rows in the Devstackï¿½s Trove installation (see the redstack function of devstack).
 
 * If Keystone accepts only HTTPS connections, in order to validate CA_file.pem of Keystone (SSL_504 error) you sholud modify:
 
@@ -178,7 +178,7 @@ Prepare database
 ----------------
 
 * Create the datatabse.
-	In the VM in which I have create the Trove’s database (see the Havana’s services configuration)::
+	In the VM in which I have create the Troveï¿½s database (see the Havanaï¿½s services configuration)::
 		# mysql -u root -p
 		mysql> CREATE DATABASE trove;
 		mysql> GRANT ALL PRIVILEGES ON trove.* TO trove@'localhost' \
@@ -188,13 +188,13 @@ Prepare database
 
 * Inizialize the database (see the redstack function of devstack)::
 	
-	# trove-manage --config-file=<PathToTroveConf> db_sync
+	# trove-manage --config-file=<PathToTroveConf> db_wipe mysql
 
 	As an alternative, you can use:
 
 	# trove-manage --config-file=<PathToTroveConf> db_sync
 
-* Access to Trove’s database and insert the following rows (see the redstack function of devstack)::
+* Access to Troveï¿½s database and insert the following rows (see the redstack function of devstack)::
 
 	mysql> INSERT INTO datastores VALUES ('a00000a0-00a0-0a00-00a0-000a000000aa', 'mysql', 
 	'b00000b0-00b0-0b00-00b0-000b000000bb'); 
@@ -240,15 +240,15 @@ Run the following commands::
 
 Troubleshooting
 ---------------
-No instance IPs in the output of ‘trove-cli instance get’
+No instance IPs in the output of ï¿½trove-cli instance getï¿½
 
-If Trove instance is created properly, is in the state ACTIVE, and is known for sure to be working, but there are no IP addresses for the instance in the output of ‘trove-cli instance get <id>’, then make sure the following lines are added to trove.conf:
+If Trove instance is created properly, is in the state ACTIVE, and is known for sure to be working, but there are no IP addresses for the instance in the output of ï¿½trove-cli instance get <id>ï¿½, then make sure the following lines are added to trove.conf:
 
 add_addresses = True
 network_label_regex = ^NETWORK_NAME$
 where NETWORK_NAME should be replaced with real name of the nova network to which the instance is connected to.
 
-One possible way to find the nova network name is to execute the ‘nova list’ command. The output will list all Openstack instances for the tenant, including network information. Look for
+One possible way to find the nova network name is to execute the ï¿½nova listï¿½ command. The output will list all Openstack instances for the tenant, including network information. Look for
 
 NETWORK_NAME=IP_ADDRESS
 
