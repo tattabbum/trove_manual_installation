@@ -47,7 +47,7 @@ Loggin as root user and execute the following commands:
 Obtain Trove
 ------------
 
-* Get Trove�s sources from git::
+* Get Trove's sources from git::
 
 	# git clone https://github.com/openstack/trove.git
 	# git clone https://github.com/openstack/python-troveclient.git
@@ -73,7 +73,7 @@ Install Trove
 
 Prepare OpenStack
 -----------------
-* Create a tenant �trove� and user �trove� with password �trove� to be used with Trove::
+* Create a tenant "trove" and user "trove" with password "trove" to be used with Trove::
 
 	Create tenant
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword>  \
@@ -106,7 +106,7 @@ Prepare OpenStack
            --os-auth-url http://<KeystoneIp>:35357/v2.0 \
            service-create --name trove --type database
 
-* Create endpoint that points to trove. Pay attention to the use of quotes (�):
+* Create endpoint that points to trove. Pay attention to the use of quotes ('):
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword> \
            --os-tenant-name <OpenStackAdminTenant> \
            --os-auth-url http://<KeystoneIp>:35357/v2.0 endpoint-create \
@@ -120,10 +120,10 @@ Prepare Trove configuration files
 
 There are several configuration files for Trove:
 
-* api-paste.ini and trove.conf.sample � for trove-api
-* trove-taskmanager.conf.sample � for trove-taskmanager
-* trove-guestagent.conf.sample � for trove-guestagent
-* <service_type>.cloudinit � cloudinit scripts for different service types. For now only �mysql� and �percona� are recognized as valid service types. NOTE: file names must exactly follow the pattern, e.g. �mysql.cloudinit�
+* api-paste.ini and trove.conf.sample - for trove-api
+* trove-taskmanager.conf.sample - for trove-taskmanager
+* trove-guestagent.conf.sample - for trove-guestagent
+* <service_type>.cloudinit - cloudinit scripts for different service types. For now only mysql and percona are recognized as valid service types. NOTE: file names must exactly follow the pattern, e.g. 'mysql.cloudinit'
 
 Samples of the above are available in $TROVE/trove/etc/trove/ as *.conf.sample files.
 If a vanilla Ubuntu image used as a source image for Trove instances, then it is cloudinit script�s responsibility to install and run Trove guestagent in the instance.
@@ -150,10 +150,10 @@ As an alternative one may consider creating a custom image with pre-installed an
 
 	* the $TROVE_PATH/trove/trove/common/remote.py file in the rows 45 and 65, adding the cacert="/path/to/your/file.pem" ad last parameter in the .Client() function.
 
-	* the /usr/local/lib/python2.7/dist-packages/keystoneclient/middleware/auth_token.py
-in the rows 720 and 725:
-720: print('#####self.ssl_ca_file', self.ssl_ca_file) 
-725: kwargs['verify'] = '/path/to/your/file.pem' 
+	* the /usr/local/lib/python2.7/dist-packages/keystoneclient/middleware/auth_token.py in the rows 720 and 725::
+	
+	720: print('#####self.ssl_ca_file', self.ssl_ca_file) 
+	725: kwargs['verify'] = '/path/to/your/file.pem' 
 
 Prepare image
 -------------
@@ -194,7 +194,7 @@ Prepare database
 
 	# trove-manage --config-file=<PathToTroveConf> db_sync
 
-* Access to Trove�s database and insert the following rows (see the redstack function of devstack)::
+* Access to Trove's database and insert the following rows (see the redstack function of devstack)::
 
 	mysql> INSERT INTO datastores VALUES ('a00000a0-00a0-0a00-00a0-000a000000aa', 'mysql', 
 	'b00000b0-00b0-0b00-00b0-000b000000bb'); 
@@ -240,7 +240,7 @@ Run the following commands::
 
 Troubleshooting
 ---------------
-No instance IPs in the output of �trove-cli instance get�
+No instance IPs in the output of "trove-cli instance get"
 
 If Trove instance is created properly, is in the state ACTIVE, and is known for sure to be working, but there are no IP addresses for the instance in the output of �trove-cli instance get <id>�, then make sure the following lines are added to trove.conf:
 
