@@ -24,9 +24,11 @@ Install dependencies
 Loggin as root user and execute the following commands:
 
 * Install required packages::
+
 	# apt-get install build-essential libxslt1-dev qemu-utils mysql-client git python-dev python-pexpect python-mysqldb libmysqlclient-dev
 
 * Some packages in Ubuntu repo are outdated, so install their latest version from sources::
+
 	# cd ~
 	# wget https://pypi.python.org/packages/source/s/setuptools/setuptools-0.9.8.tar.gz
 	# tar xfvz setuptools-0.9.8.tar.gz
@@ -41,7 +43,7 @@ Loggin as root user and execute the following commands:
 
 	# cd ~
 
-	You should use the last versions on https://pypi.python.org/packages/source/s/setuptools/ and https://pypi.python.org/packages/source/p/pip/ 
+You should use the last versions on https://pypi.python.org/packages/source/s/setuptools/ and https://pypi.python.org/packages/source/p/pip/ 
 
 ------------
 Obtain Trove
@@ -57,17 +59,22 @@ Install Trove
 -------------
 
 * First install required python packages::
+
 	# cd ~/trove
 	# pip install -r requirements.txt
 
 * Install Trove itself::
+
 	# python setup.py develop
 
 * Install Trove CLI::
+
 	# cd ~/python-troveclient
 	# python setup.py develop
 	# cd ~
-* We�ll need glance client as well::
+	
+* We'll need glance client as well::
+
 	# pip install python-glanceclient
 
 
@@ -100,13 +107,15 @@ Prepare OpenStack
            user-role-add --user trove --tenant service --role admin
 
 
-* Create service trove:
+* Create service trove::
+
 	# key'stone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword> \ 
            --os-tenant-name <OpenStackAdminTenant> \
            --os-auth-url http://<KeystoneIp>:35357/v2.0 \
            service-create --name trove --type database
 
-* Create endpoint that points to trove. Pay attention to the use of quotes ('):
+* Create endpoint that points to trove. Pay attention to the use of quotes (')::
+
 	# keystone --os-username <OpenStackAdminUsername> --os-password <OpenStackAdminPassword> \
            --os-tenant-name <OpenStackAdminTenant> \
            --os-auth-url http://<KeystoneIp>:35357/v2.0 endpoint-create \
@@ -178,7 +187,7 @@ Prepare database
 ----------------
 
 * Create the datatabse.
-	In the VM in which I have create the Trove�s database (see the Havana�s services configuration)::
+	In the VM in which I have create the Trove's database (see the Havana's services configuration)::
 		# mysql -u root -p
 		mysql> CREATE DATABASE trove;
 		mysql> GRANT ALL PRIVILEGES ON trove.* TO trove@'localhost' \
